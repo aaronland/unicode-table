@@ -1,0 +1,166 @@
+body {
+    font-family: sans-serif;
+    margin:2em;
+    min-width:1000px;
+}
+
+table {
+    border-collapse:collapse;
+    width:500px;
+}
+
+td,td {
+    width:50px;
+    height:50px;
+    max-width:50px;
+    max-height:50px;    
+    text-align:center;
+    vertical-align:center;
+    font-size:1.5em;
+    border:1px solid #ccc;
+}
+
+.preview {
+    height:30px;
+    margin-top:5px;
+}
+
+.exp {
+    font:8pt sans-serif;
+    color:#aaa;
+    height:1em;
+}
+
+#unibox {
+    clear:both;
+}
+
+#bigletter {
+    margin:0;
+    /* border:1px solid red; */
+    height:350px;
+    max-height:350px;
+    text-align:center;
+    overflow:scroll;
+}
+
+#bigletter-details {
+    border-top: solid thin;
+    width:100%;
+    text-align:left;
+    padding:0;
+    margin:0;
+    margin-top:2em;
+}
+
+#bigletter-details li {
+    list-style-type: none;
+    margin-top:.25em;
+}
+
+#bigletter-details li:first-child {
+    font-weight: 700;
+    margin-top:.75em !important;
+}
+
+#bigwrap {
+    float:left;
+    width:500px;
+    height:532px;
+    font-size: 15em; // 250px;
+    background:#eee;    
+}
+
+#big {
+    margin:50px;
+}
+
+.medium {
+    font-size:.05em;
+    width:300px;
+}
+
+a {
+    text-decoration:none;
+    color:black;
+}
+
+div#sliders {
+    width:1000px;
+    padding-bottom:30px;
+    font-size:8pt;
+    text-transform:uppercase;
+}
+
+div.slidiv {
+    float:left;
+    font-size:8pt;
+}
+
+#unicode {
+    float:left;
+}
+
+#jumpto {
+    display: inline;
+    float:right;
+}
+
+#jumpto li {
+    display: inline;
+    padding-left:1em;
+}   
+
+#results {
+    height:500px;
+    width:500px;
+    max-height:500px;
+    overflow:scroll;
+    font-size:12pt;
+    padding:1em;
+    padding-left:.2em;
+}
+
+#results td {
+    text-align:left;
+}
+
+#results tr:hover {
+    font-weight:700;
+}
+
+#clear-results {
+    display:none;
+}
+
+.char {
+    text-align: center !important;
+    border:solid thin;
+}
+
+.name {
+    font-size:11px;
+    width:100%;
+    padding-left:1em;
+}
+
+#footer {
+    color:#666;
+    margin-top:2.5em;
+    font-size:small;
+}
+
+#instructions {
+    display: inline;
+    padding:0;
+    margin:0;
+}
+
+#instructions:before {
+    content: "keyboard commands: ";
+}
+
+#instructions li {
+    display: inline;
+    padding-right:1em;
+}   
