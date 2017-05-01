@@ -208,15 +208,15 @@ function drawBig(id, name){
 		preview.setAttribute("class", "selected");
 	}
 	
-	var hx = parseInt(id);
-	hx = hx.toString(16);
-	hx = hx.toUpperCase();
-	hx = pad_four(hx);
+	var hex = parseInt(id);
+	hex = hex.toString(16);
+	hex = hex.toUpperCase();
+	hex = pad_four(hex);
 	
 	var name = "&#160;";
 	
-	if (ucd[hx]) {
-		name = ucd[hx];
+	if (ucd[hex]) {
+		name = ucd[hex];
 	}
 			
 	var wrapper = document.createElement("div");
@@ -238,7 +238,7 @@ function drawBig(id, name){
 	i.innerHTML = '&amp;#' + id + ';';
 
 	var h = document.createElement("li");
-	h.innerHTML = '&amp;#x' + hx + ';';
+	h.innerHTML = 'U+' + hex + ';';
 	
 	details.appendChild(n);
 	details.appendChild(i);
