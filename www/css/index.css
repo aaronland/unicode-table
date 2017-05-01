@@ -129,8 +129,17 @@ div.slidiv {
     font-weight:700;
 }
 
+#search {
+    padding:.5em;
+    font-weight:700;
+    text-transform: uppercase;
+}
+
 #clear-results {
     display:none;
+    padding:.6em;
+    border: solid thin;
+    font-weight:700;
 }
 
 .char {
@@ -164,3 +173,44 @@ div.slidiv {
     display: inline;
     padding-right:1em;
 }   
+
+td:hover {
+    background-color:#adadad;
+}
+
+.selected {
+    background-color:yellow;
+}
+
+.step:before {
+    content: "→";
+    font-weight:700;
+    padding-right: .5em;
+    color:#000;
+}
+
+.step-forward:before {
+    content: "→";
+}
+
+.step-back:before {
+    content: "←";
+}
+
+.advance:before {
+    content: "↓";
+}
+
+.reverse:before {
+    content: "↑";
+}
+
+.warning {
+    font-weight: 700;
+    color: red;
+}
+
+.warning:before {
+    content: "⚠";
+    padding-right: 1em;
+}

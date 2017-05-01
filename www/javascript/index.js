@@ -35,74 +35,82 @@ function pad_four(x) {
 
 function make_results(results){
 
-	var count = results.length;
+	var count = 0;
+
+	for (k in results){
+		count++;
+	}
 	
 	var root = document.createElement("div");
 	root.setAttribute("id", "results");
 
-	var clear = document.createElement("button");
-	clear.setAttribute("id", "clear-results");
-	clear.appendChild(document.createTextNode("clear"));
+	if (count == 0){
 
-	root.appendChild(clear);
-	
-	var table = document.createElement("table");
+		var p = document.createElement("p");
+		p.setAttribute("class", "warning");
+		p.appendChild(document.createTextNode("No matches."));
 
-	var row = document.createElement("tr");
-
-	var char_header = document.createElement("th");
-	char_header.appendChild(document.createTextNode("Character"));
-
-	var name_header = document.createElement("th");
-	name_header.appendChild(document.createTextNode("Name"));
-
-	row.appendChild(char_header);
-	row.appendChild(name_header);
-
-	table.appendChild(row);
-
-	var mouseover = function(e){
-		var el = e.target;
-		var dec = el.getAttribute("data-decimal");
-		drawBig(dec);		
-	};
-
-	var onclick = function(e){
-
-		var el = e.target;
-		var dec = el.getAttribute("data-decimal");
-		location.href = "#" + dec;
-	};
-	
-	for (var hx in results){
-
-		var dec = parseInt(hx, 16);		
-		var row = document.createElement("tr");
-		
-		var char = document.createElement("td");
-		char.setAttribute("class", "char");
-		char.setAttribute("data-decimal", dec);
-		char.innerHTML = "&#" + dec + ";";
-
-		char.onclick = onclick;		
-		char.onmouseover = mouseover;
-		
-		var name = document.createElement("td");
-		name.setAttribute("class", "name");
-		name.setAttribute("data-decimal", dec);		
-		name.appendChild(document.createTextNode(results[hx]));
-
-		name.onclick = onclick;		
-		name.onmouseover = mouseover;
-		
-		row.append(char);
-		row.append(name);
-		
-		table.appendChild(row);
+		root.appendChild(p);
 	}
 
-	root.appendChild(table);
+	else {
+		
+		var table = document.createElement("table");
+		var row = document.createElement("tr");
+		
+		var char_header = document.createElement("th");
+		char_header.appendChild(document.createTextNode("Character"));
 
+		var name_header = document.createElement("th");
+		name_header.appendChild(document.createTextNode("Name"));
+		
+		row.appendChild(char_header);
+		row.appendChild(name_header);
+
+		table.appendChild(row);
+
+		var mouseover = function(e){
+			var el = e.target;
+			var dec = el.getAttribute("data-decimal");
+			drawBig(dec);		
+		};
+
+		var onclick = function(e){
+			var el = e.target;
+			var dec = el.getAttribute("data-decimal");
+			location.href = "#" + dec;
+		};
+	
+		for (var hx in results){
+
+			var dec = parseInt(hx, 16);		
+			var row = document.createElement("tr");
+		
+			var char = document.createElement("td");
+			char.setAttribute("class", "char");
+			char.setAttribute("data-decimal", dec);
+			char.innerHTML = "&#" + dec + ";";
+			
+			char.onclick = onclick;		
+			char.onmouseover = mouseover;
+		
+			var name = document.createElement("td");
+			name.setAttribute("class", "name");
+			name.setAttribute("data-decimal", dec);		
+			name.appendChild(document.createTextNode(results[hx]));
+			
+			name.onclick = onclick;		
+			name.onmouseover = mouseover;
+		
+			row.append(char);
+			row.append(name);
+			
+			table.appendChild(row);
+		}
+
+		root.appendChild(table);
+	}
+	
 	var big = document.getElementById("big");
 	big.innerHTML = "";
 
@@ -123,6 +131,15 @@ function make_table(top_left, lookup) {
 	var height = 10;
 	var width = 10;
 
+	var onclick = function(e){
+				
+		var el = e.target;
+		var dec = el.getAttribute("id");
+
+		location.href = "#" + dec;
+		drawBig(dec);
+	};
+	
 	while (i < height){
 
 		var tr = document.createElement("tr");
@@ -130,41 +147,34 @@ function make_table(top_left, lookup) {
 		
 		while (j < width){
 			
-			var no = top_left + (i * height) + j ;
+			var dec = top_left + (i * height) + j ;
 
 			var td = document.createElement("td");
-			td.setAttribute("id", no);
-
-			var link = document.createElement("a");
-			link.setAttribute("href", "#" + no);
-			// link.appendChild(document.createTextNode("&#" + no + ";"));
-
-			var preview = document.createElement("div");
-			preview.setAttribute("class", "preview");
-			preview.innerHTML = "&#" + no + ";";
-
-			link.appendChild(preview);
+			td.setAttribute("id", "preview-" + dec);
 			
-			var div = document.createElement("div");
-			div.setAttribute("class", "exp");
-			div.innerHTML = "&amp;#" + no + ";";
+			var wrapper = document.createElement("div");
+			wrapper.setAttribute("class", "wrapper");
+			
+			var preview = document.createElement("div");
+			preview.setAttribute("id", dec);			
+			preview.setAttribute("class", "preview");
+			preview.innerHTML = "&#" + dec + ";";
 
-			link.appendChild(div);
-			td.appendChild(link);
+			preview.onclick = onclick;
+			
+			var exp = document.createElement("div");
+			exp.setAttribute("id", dec);			
+			exp.setAttribute("class", "exp");
+			exp.innerHTML = "&amp;#" + dec + ";";
 
-			td.onmouseover = function(e){
-				
-				var el = e.target;				
-				var id = el.getAttribute("id");
+			wrapper.appendChild(preview);			
+			wrapper.appendChild(exp);
 
-				if (! id){
-					return;
-				}
-
-				drawBig(id);
-			};
-
+			wrapper.onclick = onclick;
+			
+			td.appendChild(wrapper);
 			tr.appendChild(td);
+			
 			j++;
 		}
 
@@ -180,6 +190,24 @@ function make_table(top_left, lookup) {
 
 function drawBig(id, name){
 
+	var selected = document.getElementsByClassName("selected");
+	var count = selected.length;
+	
+	for (var i=0; i < count; i++){
+		var el = selected[i];
+		
+		if (el){
+			el.removeAttribute("class");
+		}
+	}
+	
+	var preview_id = "preview-" + id;
+	var preview = document.getElementById(preview_id);
+	
+	if (preview){
+		preview.setAttribute("class", "selected");
+	}
+	
 	var hx = parseInt(id);
 	hx = hx.toString(16);
 	hx = hx.toUpperCase();
@@ -206,8 +234,6 @@ function drawBig(id, name){
 	var n = document.createElement("li");
 	n.innerHTML = name;
 	
-	// n.appendChild(document.createTextNode(name));
-
 	var i = document.createElement("li");
 	i.innerHTML = '&amp;#' + id + ';';
 
