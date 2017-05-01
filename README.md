@@ -8,11 +8,11 @@ It doesn't have sliders but it does have keyboard commands and rudimentary searc
 
 ### Browsing
 
-![](images/unicode-table-browse.png)
+![](images/20170501-unicode-table-browse.png)
 
 ### Searching
 
-![](images/unicode-table-search.png)
+![](images/20170501-unicode-table-search.png)
 
 ## Important
 

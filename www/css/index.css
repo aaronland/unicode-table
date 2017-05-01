@@ -145,6 +145,8 @@ div.slidiv {
 .char {
     text-align: center !important;
     border:solid thin;
+    padding-left:.5em;
+    padding-right:.5em;    
 }
 
 .name {

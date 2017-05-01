@@ -57,7 +57,8 @@ function make_results(results){
 		
 		var table = document.createElement("table");
 		var row = document.createElement("tr");
-		
+
+		/*
 		var char_header = document.createElement("th");
 		char_header.appendChild(document.createTextNode("Character"));
 
@@ -68,7 +69,8 @@ function make_results(results){
 		row.appendChild(name_header);
 
 		table.appendChild(row);
-
+		*/
+		
 		var mouseover = function(e){
 			var el = e.target;
 			var dec = el.getAttribute("data-decimal");
