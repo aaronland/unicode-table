@@ -16,7 +16,7 @@ It doesn't have sliders but it does have keyboard commands and rudimentary searc
 
 ## Important
 
-This is still wet paint.
+This is still wet paint. It's not pretty under the hood or above but it works. At least for me.
 
 ## See also
 
