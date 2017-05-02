@@ -2,9 +2,9 @@ var the_top_left = 0;
 
 function search(q){
 
-	var results = {};
-	
 	q = q.toUpperCase();
+	
+	var results = {};
 
 	for (var i in ucd){
 
@@ -307,6 +307,8 @@ window.addEventListener("load", function load(event){
 		var key = e.keyCode || e.which;
 		var keychar = String.fromCharCode(key);
 
+		var redraw = true;
+		
 		var pos = 0;
 		var wanted = 0;
 
@@ -322,17 +324,23 @@ window.addEventListener("load", function load(event){
 		// left-arrow
 		
 		if (key == 37){
+			
 			wanted = pos - 1;
+			var step = Math.floor(pos / incr) * incr;
+
+			if (wanted >= step){
+				redraw = false;
+			}
 		}
 
 		// up-arrow
 		
 		else if (key == 38){
 
-			var top = Math.floor(pos / incr) * incr;
-			wanted = top;
+			var step = Math.floor(pos / incr) * incr;
+			wanted = step;
 
-			if (pos == top){
+			if (pos == step){
 				wanted = wanted - incr;
 			}
 		}
@@ -340,13 +348,19 @@ window.addEventListener("load", function load(event){
 		// right-arrow
 
 		else if (key == 39){
+			
 			wanted = pos + 1;
+			var step = (Math.floor(pos / incr) * incr) + incr;
+
+			if (wanted < step){
+				redraw = false;
+			}
 		}
 
 		// down-arrow
 		
 		else if (key == 40){
-			wanted = (Math.floor(pos / incr) * incr) + incr;			
+			wanted = (Math.floor(pos / incr) * incr) + incr;
 		}
 
 		else {
@@ -358,28 +372,15 @@ window.addEventListener("load", function load(event){
 		}
 		
 		location.href = "#" + wanted;
-		make_table(wanted);
-	};
 
-	/*
-	var jump = document.getElementById("jump");
-	
-	jump.onchange = function(e){
-		var el = e.target;
-		var i = parseInt(el.value);
-
-		if (! i){
-			return false;
+		if (redraw){
+			make_table(wanted);
 		}
 
-		if (i <= 0){
-			i = 1;
+		else {
+			drawBig(wanted);
 		}
-
-		location.href = "#" + i;		
-		make_table(i);
 	};
-	*/
 	
 	var search_input = document.getElementById("search");
 	
