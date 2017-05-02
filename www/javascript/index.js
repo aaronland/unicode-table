@@ -33,7 +33,7 @@ function pad_four(x) {
 	return x;
 }
 
-function make_results(results){
+function draw_results(results){
 
 	var count = 0;
 
@@ -122,7 +122,7 @@ function make_results(results){
 	u.appendChild(root);	
 }
 
-function make_table(top_left, lookup) {
+function draw_table(top_left, lookup) {
 	
 	the_top_left = parseInt(top_left);
 	
@@ -261,10 +261,10 @@ function toSpot(hashString) {
 	var num_str = hashString.substring(1);
 	var pos = parseInt(num_str);
 
-	return snapTo(pos);
+	return snap_to(pos);
 }
 
-function snapTo(pos){
+function snap_to(pos){
 	
 	a = Math.floor(pos/10000);
 	b = Math.floor((pos - a * 10000)/1000);
@@ -294,7 +294,7 @@ window.addEventListener("load", function load(event){
 			var el = e.target;
 			var href = el.getAttribute("href");
 			var wanted = href.substring(href.indexOf('#'));
-			make_table(toSpot(wanted));			
+			draw_table(toSpot(wanted));			
 		};
 	}
 
@@ -329,7 +329,7 @@ window.addEventListener("load", function load(event){
 			pos = parseInt(num_str);
 		}
 
-		var snap = snapTo(pos);
+		var snap = snap_to(pos);
 		var offset = 0
 		
 		// left-arrow
@@ -337,7 +337,7 @@ window.addEventListener("load", function load(event){
 		if (key == 37){
 			
 			wanted = pos - 1;
-			offset = -100;
+			offset = -100;	// this is the problem?
 			
 			if (wanted >= snap){
 				redraw = false;
@@ -382,6 +382,8 @@ window.addEventListener("load", function load(event){
 			return;
 		}
 
+		// something 542
+		// file:///Users/asc/unicode-table/www/index.html#542
 		// console.log("pos " + pos + " want " + wanted + " snap " + snap + " redraw " + redraw);
 		
 		if (wanted <= 0){
@@ -391,7 +393,7 @@ window.addEventListener("load", function load(event){
 		location.href = "#" + wanted;
 
 		if (redraw){
-			make_table(snapTo(wanted + offset));
+			draw_table(snap_to(wanted + offset));
 		}
 
 		drawBig(wanted);
@@ -405,7 +407,7 @@ window.addEventListener("load", function load(event){
 		var q = el.value;
 
 		var results = search(q);
-		make_results(results)
+		draw_results(results)
 
 		var cl = document.getElementById("clear-results");
 		cl.style.display = "inline";
@@ -421,10 +423,10 @@ window.addEventListener("load", function load(event){
 		var search_input = document.getElementById("search");
 		search_input.value = "";
 		
-		make_table(the_top_left);		
+		draw_table(the_top_left);		
 	};
 	
-	make_table(the_top_left);
+	draw_table(the_top_left);
 
 	var num = hash.substring(1);
 	var pos = parseInt(num);
