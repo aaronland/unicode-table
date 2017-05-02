@@ -260,6 +260,11 @@ function toSpot(hashString) {
 	
 	var num_str = hashString.substring(1);
 	var pos = parseInt(num_str);
+
+	return snapTo(pos);
+}
+
+function snapTo(pos){
 	
 	a = Math.floor(pos/10000);
 	b = Math.floor((pos - a * 10000)/1000);
@@ -324,14 +329,16 @@ window.addEventListener("load", function load(event){
 			pos = parseInt(num_str);
 		}
 
+		var snap = snapTo(pos);
+		var next = snap + 100;
+
 		// left-arrow
 		
 		if (key == 37){
 			
 			wanted = pos - 1;
-			var step = Math.floor(pos / 100) * 100;
 
-			if (wanted >= step){
+			if (wanted >= snap){
 				redraw = false;
 			}
 		}
@@ -340,29 +347,11 @@ window.addEventListener("load", function load(event){
 		
 		else if (key == 38){
 
-			var step = Math.floor(pos / 100) * 100;
-
-			if (incr == 10){
-				wanted = pos - incr;
-			}
-
-			else {
-				wanted = step;
-				
-				if (pos == step){
-					wanted = wanted - incr;
-				}
-			}
+			wanted = pos - incr;
 						
-			if (wanted >= step){
+			if (wanted >= snap){
 				redraw = false;
 			}
-			
-			console.log("up");
-			console.log("pos: " + pos);
-			console.log("step: " + step);
-			console.log("wanted: " + wanted);
-
 		}
 		
 		// right-arrow
@@ -370,9 +359,8 @@ window.addEventListener("load", function load(event){
 		else if (key == 39){
 			
 			wanted = pos + 1;
-			var step = (Math.floor(pos / 100) * 100) + 100;
 
-			if (wanted < step){
+			if (wanted < next){
 				redraw = false;
 			}
 		}
@@ -381,22 +369,9 @@ window.addEventListener("load", function load(event){
 		
 		else if (key == 40){
 
-			var step = (Math.floor(pos / 100) * 100) + 100;
-
-			if (incr == 10){
-				wanted = pos + incr;
-			}
-
-			else {			
-				wanted = step;
-			}
-
-			console.log("down");
-			console.log("pos: " + pos);
-			console.log("step: " + step);
-			console.log("wanted: " + wanted);
+			wanted = pos + incr;
 			
-			if (wanted < step){
+			if (wanted < next){
 				redraw = false;
 			}
 		}
@@ -405,6 +380,8 @@ window.addEventListener("load", function load(event){
 			return;
 		}
 
+		console.log("pos " + pos + " want " + wanted + " snap " + snap + " next " + next + " redraw " + redraw);
+		
 		if (wanted <= 0){
 			wanted = 0;
 		}
@@ -412,12 +389,11 @@ window.addEventListener("load", function load(event){
 		location.href = "#" + wanted;
 
 		if (redraw){
-			make_table(wanted);
+			console.log("make table " + wanted + " : " + snapTo(wanted));
+			make_table(snapTo(wanted - 100));
 		}
 
-		else {
-			drawBig(wanted);
-		}
+		drawBig(wanted);
 	};
 	
 	var search_input = document.getElementById("search");
