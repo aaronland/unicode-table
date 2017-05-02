@@ -330,14 +330,15 @@ window.addEventListener("load", function load(event){
 		}
 
 		var snap = snapTo(pos);
-		var next = snap + 100;
-
+		var offset = 0
+		
 		// left-arrow
 		
 		if (key == 37){
 			
 			wanted = pos - 1;
-
+			offset = -100;
+			
 			if (wanted >= snap){
 				redraw = false;
 			}
@@ -348,7 +349,8 @@ window.addEventListener("load", function load(event){
 		else if (key == 38){
 
 			wanted = pos - incr;
-						
+			offset = -100;
+			
 			if (wanted >= snap){
 				redraw = false;
 			}
@@ -360,7 +362,7 @@ window.addEventListener("load", function load(event){
 			
 			wanted = pos + 1;
 
-			if (wanted < next){
+			if (wanted < snap){
 				redraw = false;
 			}
 		}
@@ -371,7 +373,7 @@ window.addEventListener("load", function load(event){
 
 			wanted = pos + incr;
 			
-			if (wanted < next){
+			if (wanted < snap){
 				redraw = false;
 			}
 		}
@@ -380,7 +382,7 @@ window.addEventListener("load", function load(event){
 			return;
 		}
 
-		console.log("pos " + pos + " want " + wanted + " snap " + snap + " next " + next + " redraw " + redraw);
+		// console.log("pos " + pos + " want " + wanted + " snap " + snap + " redraw " + redraw);
 		
 		if (wanted <= 0){
 			wanted = 0;
@@ -389,8 +391,7 @@ window.addEventListener("load", function load(event){
 		location.href = "#" + wanted;
 
 		if (redraw){
-			console.log("make table " + wanted + " : " + snapTo(wanted));
-			make_table(snapTo(wanted - 100));
+			make_table(snapTo(wanted + offset));
 		}
 
 		drawBig(wanted);
