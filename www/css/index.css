@@ -26,7 +26,7 @@ td,td {
 }
 
 .exp {
-    font:8pt sans-serif;
+    font:7pt sans-serif;
     color:#aaa;
     height:1em;
 }
@@ -177,7 +177,7 @@ div.slidiv {
 }   
 
 td:hover {
-    background-color:#adadad;
+    background-color:#aaa;
 }
 
 .selected {

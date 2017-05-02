@@ -125,7 +125,6 @@ function make_results(results){
 function make_table(top_left, lookup) {
 	
 	the_top_left = parseInt(top_left);
-	drawBig(the_top_left);
 	
 	var table = document.createElement("table");
 	var i = 0;
@@ -188,6 +187,8 @@ function make_table(top_left, lookup) {
 	u.innerHTML = "";
 	
 	u.appendChild(table);
+
+	drawBig(the_top_left);	
 }
 
 function drawBig(id, name){
