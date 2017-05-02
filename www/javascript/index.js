@@ -271,8 +271,10 @@ function toSpot(hashString) {
 
 window.addEventListener("load", function load(event){
 
-	if (window.location.hash) {
-		the_top_left = toSpot(window.location.hash);
+	var hash = window.location.hash;
+	
+	if (hash) {
+		the_top_left = toSpot(hash);
 	}
 
 	var jump = document.getElementById("jumpto");
@@ -295,13 +297,13 @@ window.addEventListener("load", function load(event){
 
 		// console.log(e);
 
-		var incr = 100;
+		var incr = 10;
 
 		if (e.shiftKey){
-			incr = 1000;
+			incr = 100;
 
 			if (e.altKey){
-				incr = 10000;
+				incr = 1000;
 			}
 		}
 		
@@ -327,7 +329,7 @@ window.addEventListener("load", function load(event){
 		if (key == 37){
 			
 			wanted = pos - 1;
-			var step = Math.floor(pos / incr) * incr;
+			var step = Math.floor(pos / 100) * 100;
 
 			if (wanted >= step){
 				redraw = false;
@@ -338,12 +340,29 @@ window.addEventListener("load", function load(event){
 		
 		else if (key == 38){
 
-			var step = Math.floor(pos / incr) * incr;
-			wanted = step;
+			var step = Math.floor(pos / 100) * 100;
 
-			if (pos == step){
-				wanted = wanted - incr;
+			if (incr == 10){
+				wanted = pos - incr;
 			}
+
+			else {
+				wanted = step;
+				
+				if (pos == step){
+					wanted = wanted - incr;
+				}
+			}
+						
+			if (wanted >= step){
+				redraw = false;
+			}
+			
+			console.log("up");
+			console.log("pos: " + pos);
+			console.log("step: " + step);
+			console.log("wanted: " + wanted);
+
 		}
 		
 		// right-arrow
@@ -351,7 +370,7 @@ window.addEventListener("load", function load(event){
 		else if (key == 39){
 			
 			wanted = pos + 1;
-			var step = (Math.floor(pos / incr) * incr) + incr;
+			var step = (Math.floor(pos / 100) * 100) + 100;
 
 			if (wanted < step){
 				redraw = false;
@@ -361,7 +380,25 @@ window.addEventListener("load", function load(event){
 		// down-arrow
 		
 		else if (key == 40){
-			wanted = (Math.floor(pos / incr) * incr) + incr;
+
+			var step = (Math.floor(pos / 100) * 100) + 100;
+
+			if (incr == 10){
+				wanted = pos + incr;
+			}
+
+			else {			
+				wanted = step;
+			}
+
+			console.log("down");
+			console.log("pos: " + pos);
+			console.log("step: " + step);
+			console.log("wanted: " + wanted);
+			
+			if (wanted < step){
+				redraw = false;
+			}
 		}
 
 		else {
@@ -411,4 +448,9 @@ window.addEventListener("load", function load(event){
 	};
 	
 	make_table(the_top_left);
+
+	var num = hash.substring(1);
+	var pos = parseInt(num);
+	
+	drawBig(pos);
 });
