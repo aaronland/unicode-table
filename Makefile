@@ -20,3 +20,5 @@ icns:
 
 osx:
 	electron-packager ./ "UnicodeTable" --icon="app_icon" --overwrite --prune
+
+package: icons osx
