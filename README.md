@@ -2,7 +2,7 @@
 
 `unicode-table` is a plain-vanilla, no-dependencies port of Paul Ford's [Unicode table for you](http://www.ftrain.com/unicode-table.html).
 
-It doesn't have sliders but it does have keyboard commands and rudimentary search. Also, more recent versions of Unicode, including Unihan.
+It doesn't have sliders but it does have keyboard commands and rudimentary search. Also, more recent versions of [Unicode](http://www.unicode.org/charts/), including [Unihan](http://www.unicode.org/charts/unihan.html).
 
 ## Demo
 
@@ -52,7 +52,7 @@ This is still wet paint. It's not pretty under the hood or above but it works. A
 
 ## Where does the data come from?
 
-Unicode and Unihan data are exported using [ucd-dump]() tool, like this:
+Unicode and Unihan data are exported using `ucd-dump` tool which is included in the [go-ucd](https://github.com/whosonfirst/go-ucd/) package. For example:
 
 ```
 ./bin/ucd-dump -unihan > ~/unicode-table/www/javascript/ucd.js
@@ -63,4 +63,6 @@ _Note: The _ucd-dump_ program only generates a JSON-encoded dump and does not ad
 ## See also
 
 * http://www.ftrain.com/unicode-table.html
+* http://www.unicode.org/charts/
+* http://www.unicode.org/charts/unihan.html
 * https://github.com/whosonfirst/go-ucd/
