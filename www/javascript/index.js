@@ -243,7 +243,7 @@ function drawBig(id, name){
 	big.appendChild(wrapper);
 }
 
-function toSpot(hashString) {
+function to_spot(hashString) {
 	
 	var num_str = hashString.substring(1);
 	var pos = parseInt(num_str);
@@ -268,12 +268,17 @@ function snap_to(pos){
 
 window.addEventListener("load", function load(event){
 
+	the_top_left = 0;
+	console.log("top left " + the_top_left);
+	
 	var hash = window.location.hash;
 	
 	if (hash) {
-		the_top_left = toSpot(hash);
+		the_top_left = to_spot(hash);
 	}
 
+	console.log("top left " + the_top_left);
+	
 	var jump = document.getElementById("jumpto");
 	var anchors = jump.getElementsByTagName("a");
 	var count = anchors.length;
@@ -286,7 +291,7 @@ window.addEventListener("load", function load(event){
 			var el = e.target;
 			var href = el.getAttribute("href");
 			var wanted = href.substring(href.indexOf('#'));
-			draw_table(toSpot(wanted));			
+			draw_table(to_spot(wanted));			
 		};
 	}
 
@@ -422,8 +427,4 @@ window.addEventListener("load", function load(event){
 	
 	draw_table(the_top_left);
 
-	var num = hash.substring(1);
-	var pos = parseInt(num);
-	
-	drawBig(pos);
 });
