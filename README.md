@@ -16,7 +16,7 @@ Just open [www/index.html](www/index.html) in your web browser.
 
 ### As a standalone application
 
-Well almost. Everything you need to run `unicode-table` as an [Electron]() application is included in this repository. There are a few extra steps to get it working:
+Well almost. Everything you need to run `unicode-table` as an [Electron](https://electron.atom.io/) application is included in this repository. There are a few extra steps to get it working:
 
 You will need to have [Git](https://git-scm.com/), [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed. On a Mac these are all easy to install with the [Homebrew](https://brew.sh/) package manager. On Linux all the dependencies are available via tools like `apt` or `yum`. On Windows I'm afraid I have no idea what the state of the art is these days.
 
