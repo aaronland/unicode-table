@@ -49,6 +49,10 @@ npm start
 
 ![](images/20170501-unicode-table-search.png)
 
+### Unihan
+
+![](images/20170503-unicode-table-unihan.png)
+
 ## Important
 
 This is still wet paint. It's not pretty under the hood or above but it works. At least for me.
