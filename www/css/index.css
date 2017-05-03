@@ -159,6 +159,8 @@ div.slidiv {
     color:#666;
     margin-top:2.5em;
     font-size:small;
+    width:1000px;
+    text-align:right;
 }
 
 #instructions {
@@ -215,4 +217,28 @@ td:hover {
 .warning:before {
     content: "⚠";
     padding-right: 1em;
+}
+
+#nav {
+    width: 495px;
+    padding:0px;
+    margin:0px;
+    margin-top:1em;
+    text-align:right;
+}
+
+#nav li {
+    list-style-type:none;
+    display:inline;
+}
+
+#nav li button {
+    font-size:1.25em;
+    color:#ddd;
+    border: none;
+    background-color:#fff;
+}
+
+#nav li button:hover {
+    color:#000;
 }
