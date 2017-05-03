@@ -1,0 +1,19 @@
+{
+  "name": "unicode-table",
+  "version": "1.0.0",
+  "description": "unicode-table",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/thisisaaronland/unicode-table",
+  "keywords": [
+    "unicode"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.6.2",
+    "electron-rebuild": "^1.5.7"
+  }
+}
