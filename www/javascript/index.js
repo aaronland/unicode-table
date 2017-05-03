@@ -58,19 +58,6 @@ function draw_results(results){
 		var table = document.createElement("table");
 		var row = document.createElement("tr");
 
-		/*
-		var char_header = document.createElement("th");
-		char_header.appendChild(document.createTextNode("Character"));
-
-		var name_header = document.createElement("th");
-		name_header.appendChild(document.createTextNode("Name"));
-		
-		row.appendChild(char_header);
-		row.appendChild(name_header);
-
-		table.appendChild(row);
-		*/
-		
 		var mouseover = function(e){
 			var el = e.target;
 			var dec = el.getAttribute("data-decimal");
@@ -265,13 +252,18 @@ function toSpot(hashString) {
 }
 
 function snap_to(pos){
-	
+
+	var snap = parseInt(pos / 100) * 100;
+	return snap;
+
+	/*
 	a = Math.floor(pos/10000);
 	b = Math.floor((pos - a * 10000)/1000);
 	c = Math.floor(((pos - a * 10000) - (b * 1000))/100);
 	
 	tl = Math.round(pos/100) * 100;
 	return tl;
+	*/
 }
 
 window.addEventListener("load", function load(event){
@@ -330,6 +322,8 @@ window.addEventListener("load", function load(event){
 		}
 
 		var snap = snap_to(pos);
+		var next = snap + 100;
+		
 		var offset = 0
 		
 		// left-arrow
@@ -373,7 +367,7 @@ window.addEventListener("load", function load(event){
 
 			wanted = pos + incr;
 			
-			if (wanted < snap){
+			if (wanted < next){
 				redraw = false;
 			}
 		}
@@ -381,11 +375,11 @@ window.addEventListener("load", function load(event){
 		else {
 			return;
 		}
-
-		// something 542
-		// file:///Users/asc/unicode-table/www/index.html#542
-		// console.log("pos " + pos + " want " + wanted + " snap " + snap + " redraw " + redraw);
 		
+		console.log("pos " + pos + " want " + wanted + " snap " + snap + " offset " + offset + " redraw " + redraw);
+		console.log("next " + next);
+		console.log("--");
+
 		if (wanted <= 0){
 			wanted = 0;
 		}
