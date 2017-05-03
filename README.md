@@ -53,6 +53,8 @@ npm start
 
 ![](images/20170503-unicode-table-unihan.png)
 
+![](images/20170503-unicode-table-unihan-2.png)
+
 ## Important
 
 This is still wet paint. It's not pretty under the hood or above but it works. At least for me.
