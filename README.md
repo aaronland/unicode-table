@@ -57,7 +57,7 @@ npm start
 
 ## Important
 
-This is still wet paint. It's not pretty under the hood or above but it works. At least for me.
+This is still wet paint. It's not pretty under the hood or above but it works. At least for me. There are probably missing features that we both want. [Feedback is welcome.](https://github.com/thisisaaronland/unicode-table/issues)
 
 ## Where does the data come from?
 
