@@ -12,7 +12,7 @@ It doesn't have sliders but it does have keyboard commands and rudimentary searc
 
 ### In a plain old web browser
 
-Just open [www/index.html](www/index.html) in your web browser.
+Just open `www/index.html` in your web browser.
 
 ### As a standalone application
 
