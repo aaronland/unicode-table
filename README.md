@@ -4,6 +4,38 @@
 
 It doesn't have sliders but it does have keyboard commands and rudimentary search. Also, more recent versions of Unicode.
 
+## Demo
+
+[https://thisisaaronland.github.io/unicode-table/](https://thisisaaronland.github.io/unicode-table/)
+
+## Usage
+
+### In a plain old web browser
+
+Just open [www/index.html](www/index.html) in your web browser.
+
+### As a standalone application
+
+Well almost. Everything you need to run `unicode-table` as an [Electron]() application is included in this repository. There are a few extra steps to get it working:
+
+You will need to have [Git](https://git-scm.com/), [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed. On a Mac these are all easy to install with the [Homebrew](https://brew.sh/) package manager. On Linux all the dependencies are available via tools like `apt` or `yum`. On Windows I'm afraid I have no idea what the state of the art is these days.
+
+Once all the dependencies are installed:
+
+```
+# Clone this repository
+git clone https://github.com/thisisaaronland/unicode-table
+
+# Go into the repository
+cd unicode-table
+
+# Install dependencies
+npm install
+
+# Run the app
+npm start
+```
+
 ## Pictures or it didn't happen
 
 ### Browsing
