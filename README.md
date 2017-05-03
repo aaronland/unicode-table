@@ -10,9 +10,15 @@ It doesn't have sliders but it does have keyboard commands and rudimentary searc
 
 ## Usage
 
+First, clone this repository:
+
+```
+git clone https://github.com/thisisaaronland/unicode-table
+```
+
 ### In a plain old web browser
 
-Just open `www/index.html` in your web browser.
+Just open `unicode-table/www/index.html` in your web browser.
 
 ### As a standalone application
 
@@ -23,9 +29,6 @@ You will need to have [Git](https://git-scm.com/), [Node.js](https://nodejs.org/
 Once all the dependencies are installed:
 
 ```
-# Clone this repository
-git clone https://github.com/thisisaaronland/unicode-table
-
 # Go into the repository
 cd unicode-table
 
