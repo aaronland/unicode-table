@@ -269,7 +269,6 @@ function snap_to(pos){
 window.addEventListener("load", function load(event){
 
 	the_top_left = 0;
-	console.log("top left " + the_top_left);
 	
 	var hash = window.location.hash;
 	
@@ -277,8 +276,6 @@ window.addEventListener("load", function load(event){
 		the_top_left = to_spot(hash);
 	}
 
-	console.log("top left " + the_top_left);
-	
 	var jump = document.getElementById("jumpto");
 	var anchors = jump.getElementsByTagName("a");
 	var count = anchors.length;
@@ -381,10 +378,6 @@ window.addEventListener("load", function load(event){
 			return;
 		}
 		
-		console.log("pos " + pos + " want " + wanted + " snap " + snap + " offset " + offset + " redraw " + redraw);
-		console.log("next " + next);
-		console.log("--");
-
 		if (wanted <= 0){
 			wanted = 0;
 		}
@@ -423,6 +416,32 @@ window.addEventListener("load", function load(event){
 		search_input.value = "";
 		
 		draw_table(the_top_left);		
+	};
+
+	var prev_button = document.getElementById("prev");
+
+	prev_button.onclick = function(e){
+
+		var pos = snap_to(the_top_left);
+		var prev = pos - 100;
+
+		if (prev < 0){
+			return;
+		}
+		
+		location.href = "#" + prev;		
+		draw_table(prev);
+	};
+	
+	var next_button = document.getElementById("next");
+
+	next_button.onclick = function(e){
+
+		var pos = snap_to(the_top_left);
+		var next = pos + 100;
+
+		location.href = "#" + next;		
+		draw_table(next);		
 	};
 	
 	draw_table(the_top_left);
