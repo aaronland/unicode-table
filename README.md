@@ -2,7 +2,7 @@
 
 `unicode-table` is a plain-vanilla, no-dependencies port of Paul Ford's [Unicode table for you](http://www.ftrain.com/unicode-table.html).
 
-It doesn't have sliders but it does have keyboard commands and rudimentary search. Also, more recent versions of Unicode.
+It doesn't have sliders but it does have keyboard commands and rudimentary search. Also, more recent versions of Unicode, including Unihan.
 
 ## Demo
 
@@ -49,6 +49,16 @@ npm start
 ## Important
 
 This is still wet paint. It's not pretty under the hood or above but it works. At least for me.
+
+## Where does the data come from?
+
+Unicode and Unihan data are exported using [ucd-dump]() tool, like this:
+
+```
+./bin/ucd-dump -unihan > ~/unicode-table/www/javascript/ucd.js
+```
+
+_Note: The _ucd-dump_ program only generates a JSON-encoded dump and does not add Javascript variable declarations. I add those by hand._
 
 ## See also
 
