@@ -466,6 +466,22 @@ window.addEventListener("load", function load(event){
 
 		var el = e.target;
 		var cp = el.value;
+
+		// &#9600;
+		// U+2580;
+		// U+1F42E;
+		
+		var m = cp.match(/(?:U\+|\&\#)?([0-9a-f]+)\;?/i);
+
+		if (m){
+			cp = m[1];
+
+			if (! cp.match(/^\d+$/)){
+				cp = parseInt(cp, 16);
+			}
+		}
+
+		cp = parseInt(cp);
 		
 		var snap = snap_to(cp);
 		draw_table(name);
