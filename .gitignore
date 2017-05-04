@@ -1,2 +1,5 @@
 *~
 node_modules
+.DS_Store
+UnicodeTable-darwin-x64
+app_icon.iconset

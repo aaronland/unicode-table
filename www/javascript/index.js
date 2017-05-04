@@ -243,10 +243,24 @@ function drawBig(id, name){
 	big.appendChild(wrapper);
 }
 
-function to_spot(hashString) {
+function hash2dec(hash) {
+
+	if (! hash){
+		return 0;
+	}
+
+	var num = hash.substring(1);
+	var pos = parseInt(num);
+
+	return pos;
+}
+
+function to_spot(hash) {
+
+	var pos = hash2dec(hash);
 	
-	var num_str = hashString.substring(1);
-	var pos = parseInt(num_str);
+	// var num_str = hashString.substring(1);
+	// var pos = parseInt(num_str);
 
 	return snap_to(pos);
 }
@@ -269,10 +283,12 @@ function snap_to(pos){
 window.addEventListener("load", function load(event){
 
 	the_top_left = 0;
+	var pos = the_top_left;
 	
 	var hash = window.location.hash;
 	
 	if (hash) {
+		pos = hash2dec(hash);
 		the_top_left = to_spot(hash);
 	}
 
@@ -445,5 +461,5 @@ window.addEventListener("load", function load(event){
 	};
 	
 	draw_table(the_top_left);
-
+	drawBig(pos);
 });
