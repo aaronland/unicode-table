@@ -48,16 +48,9 @@ function hash_to_codepoint(hash) {
 	return cp;
 }
 
-function to_spot(hash) {
+function snap_to(cp){
 	
-	var cp = hash_to_codepoint(hash);
-	var snap = snap_to(cp);
-	return snap;
-}
-
-function snap_to(pos){
-	
-	var snap = parseInt(pos / 100) * 100;
+	var snap = parseInt(cp / 100) * 100;
 	return snap;
 }
 
@@ -326,21 +319,10 @@ function on_keydown(e){
 	var key = e.keyCode || e.which;
 	var keychar = String.fromCharCode(key);
 	
-	var redraw = true;
-	
-	var pos = 0;
+	var current = get_current();
 	var cp = 0;
-	
-	var href = location.href;
-	var idx = href.indexOf('#');
-	
-	if (idx != -1){		
-		var hash = href.substring(idx);
-		var num_str = hash.substring(1);
-		pos = parseInt(num_str);
-	}
-	
-	var snap = snap_to(pos);
+		
+	var snap = snap_to(current);
 	var next = snap + 100;
 	
 	var offset = 0
@@ -349,46 +331,30 @@ function on_keydown(e){
 	
 	if (key == 37){
 		
-		cp = pos - 1;
-		offset = -100;	// this is the problem?
-		
-		if (cp >= snap){
-			redraw = false;
-		}
+		cp = current - 1;
+		offset = -100;
 	}
 	
 	// up-arrow
 	
 	else if (key == 38){
 		
-		cp = pos - incr;
+		cp = current - incr;
 		offset = -100;
-		
-		if (cp >= snap){
-			redraw = false;
-		}
 	}
 	
 	// right-arrow
 	
 	else if (key == 39){
 		
-		cp = pos + 1;
-		
-		if (cp < snap){
-			redraw = false;
-		}
+		cp = current + 1;
 	}
 	
 	// down-arrow
 	
 	else if (key == 40){
 		
-		cp = pos + incr;
-		
-		if (cp < next){
-			redraw = false;
-		}
+		cp = current + incr;
 	}
 	
 	else {
@@ -398,14 +364,8 @@ function on_keydown(e){
 	if (cp <= 0){
 		cp = 0;
 	}
-	
-	location.href = "#" + cp;
-	
-	if (redraw){
-		draw_table(snap_to(cp + offset));
-	}
-	
-	draw_codepoint(cp);
+
+	redraw(cp);
 }
 
 window.addEventListener("load", function load(event){
