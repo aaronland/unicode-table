@@ -2,11 +2,11 @@ function get_current(){
 
 	var hash = window.location.hash;
 	var cp = hash_to_codepoint(hash);
-
 	return cp;
 }
 
 function set_current(cp){
+
 	location.href = "#" + cp;	
 }
 
@@ -22,7 +22,17 @@ function to_codepoint(cp){
 		}
 	}
 
-	return parseInt(cp);
+	var codepoint = parseInt(cp);
+	
+	if (! codepoint){
+
+		// please make me work...
+		// codepoint = cp.codePointAt();
+		
+		codepoint = 0;
+	}
+	
+	return codepoint;
 }
 
 function hash_to_codepoint(hash) {
@@ -32,8 +42,9 @@ function hash_to_codepoint(hash) {
 	}
 
 	hash = hash.substring(1);
+	hash = decodeURIComponent(hash);
+	
 	var cp = to_codepoint(hash);
-
 	return cp;
 }
 
@@ -122,7 +133,7 @@ function draw_results(results){
 	
 		for (var hex in results){
 
-			var cp = parseInt(hx, 16);		
+			var cp = parseInt(hex, 16);		
 			var row = document.createElement("tr");
 		
 			var char = document.createElement("td");
