@@ -1,4 +1,54 @@
-var the_top_left = 0;
+function get_current(){
+
+	var hash = window.location.hash;
+	var cp = hash_to_codepoint(hash);
+
+	return cp;
+}
+
+function set_current(cp){
+	location.href = "#" + cp;	
+}
+
+function to_codepoint(cp){
+
+	var m = cp.match(/(?:U\+|\&\#)?([0-9a-f]+)\;?/i);
+
+	if (m){
+		cp = m[1];
+
+		if (! cp.match(/^\d+$/)){
+			cp = parseInt(cp, 16);
+		}
+	}
+
+	return parseInt(cp);
+}
+
+function hash_to_codepoint(hash) {
+
+	if (! hash){
+		return 0;
+	}
+
+	hash = hash.substring(1);
+	var cp = to_codepoint(hash);
+
+	return cp;
+}
+
+function to_spot(hash) {
+	
+	var cp = hash_to_codepoint(hash);
+	var snap = snap_to(cp);
+	return snap;
+}
+
+function snap_to(pos){
+	
+	var snap = parseInt(pos / 100) * 100;
+	return snap;
+}
 
 function search(q){
 
@@ -60,33 +110,33 @@ function draw_results(results){
 
 		var mouseover = function(e){
 			var el = e.target;
-			var dec = el.getAttribute("data-decimal");
-			drawBig(dec);		
+			var cp = el.getAttribute("data-codepoint");
+			draw_codepoint(cp);		
 		};
 
 		var onclick = function(e){
 			var el = e.target;
-			var dec = el.getAttribute("data-decimal");
-			location.href = "#" + dec;
+			var cp = el.getAttribute("data-codepoint");
+			set_current(cp);
 		};
 	
-		for (var hx in results){
+		for (var hex in results){
 
-			var dec = parseInt(hx, 16);		
+			var cp = parseInt(hx, 16);		
 			var row = document.createElement("tr");
 		
 			var char = document.createElement("td");
 			char.setAttribute("class", "char");
-			char.setAttribute("data-decimal", dec);
-			char.innerHTML = "&#" + dec + ";";
+			char.setAttribute("data-codepoint", cp);
+			char.innerHTML = "&#" + cp + ";";
 			
 			char.onclick = onclick;		
 			char.onmouseover = mouseover;
 		
 			var name = document.createElement("td");
 			name.setAttribute("class", "name");
-			name.setAttribute("data-decimal", dec);		
-			name.appendChild(document.createTextNode(results[hx]));
+			name.setAttribute("data-codepoint", cp);		
+			name.appendChild(document.createTextNode(results[hex]));
 			
 			name.onclick = onclick;		
 			name.onmouseover = mouseover;
@@ -109,10 +159,8 @@ function draw_results(results){
 	u.appendChild(root);	
 }
 
-function draw_table(top_left, lookup) {
-	
-	the_top_left = parseInt(top_left);
-	
+function draw_table(start) {
+
 	var table = document.createElement("table");
 	var i = 0;
 	
@@ -122,10 +170,10 @@ function draw_table(top_left, lookup) {
 	var onclick = function(e){
 				
 		var el = e.target;
-		var dec = el.getAttribute("id");
+		var cp = el.getAttribute("id");
 
-		location.href = "#" + dec;
-		drawBig(dec);
+		set_current(cp);
+		draw_codepoint(cp);
 	};
 	
 	while (i < height){
@@ -135,25 +183,25 @@ function draw_table(top_left, lookup) {
 		
 		while (j < width){
 			
-			var dec = top_left + (i * height) + j ;
+			var cp = start + (i * height) + j ;
 
 			var td = document.createElement("td");
-			td.setAttribute("id", "preview-" + dec);
+			td.setAttribute("id", "preview-" + cp);
 			
 			var wrapper = document.createElement("div");
 			wrapper.setAttribute("class", "wrapper");
 			
 			var preview = document.createElement("div");
-			preview.setAttribute("id", dec);			
+			preview.setAttribute("id", cp);			
 			preview.setAttribute("class", "preview");
-			preview.innerHTML = "&#" + dec + ";";
+			preview.innerHTML = "&#" + cp + ";";
 
 			preview.onclick = onclick;
 			
 			var exp = document.createElement("div");
-			exp.setAttribute("id", dec);			
+			exp.setAttribute("id", cp);			
 			exp.setAttribute("class", "exp");
-			exp.innerHTML = "&amp;#" + dec + ";";
+			exp.innerHTML = "&amp;#" + cp + ";";
 
 			wrapper.appendChild(preview);			
 			wrapper.appendChild(exp);
@@ -174,11 +222,18 @@ function draw_table(top_left, lookup) {
 	u.innerHTML = "";
 	
 	u.appendChild(table);
-
-	drawBig(the_top_left);	
 }
 
-function drawBig(id, name){
+function redraw(cp){
+
+	var snap = snap_to(cp);
+	draw_table(snap);
+
+	draw_codepoint(cp);
+	set_current(cp);
+}
+
+function draw_codepoint(cp, name){
 
 	var selected = document.getElementsByClassName("selected");
 	var count = selected.length;
@@ -191,14 +246,14 @@ function drawBig(id, name){
 		}
 	}
 	
-	var preview_id = "preview-" + id;
+	var preview_id = "preview-" + cp;
 	var preview = document.getElementById(preview_id);
 	
 	if (preview){
 		preview.setAttribute("class", "selected");
 	}
 	
-	var hex = parseInt(id);
+	var hex = parseInt(cp);
 	hex = hex.toString(16);
 	hex = hex.toUpperCase();
 	hex = pad_four(hex);
@@ -215,7 +270,7 @@ function drawBig(id, name){
 	var letter = document.createElement("div");
 	letter.setAttribute("id", "bigletter");
 
-	letter.innerHTML = '&#' + id + ';';
+	letter.innerHTML = '&#' + cp + ';';
 	
 	var details = document.createElement("ul");
 	details.setAttribute("id", "bigletter-details");
@@ -225,7 +280,7 @@ function drawBig(id, name){
 	n.innerHTML = name;
 	
 	var i = document.createElement("li");
-	i.innerHTML = '&amp;#' + id + ';';
+	i.innerHTML = '&amp;#' + cp + ';';
 
 	var h = document.createElement("li");
 	h.innerHTML = 'U+' + hex + ';';
@@ -243,55 +298,107 @@ function drawBig(id, name){
 	big.appendChild(wrapper);
 }
 
-function hash2dec(hash) {
+function on_keydown(e){
+	
+	// console.log(e);
+	
+	var incr = 10;
 
-	if (! hash){
-		return 0;
+	if (e.shiftKey){
+		incr = 100;
+		
+		if (e.altKey){
+			incr = 1000;
+		}
 	}
-
-	var num = hash.substring(1);
-	var pos = parseInt(num);
-
-	return pos;
-}
-
-function to_spot(hash) {
-
-	var pos = hash2dec(hash);
 	
-	// var num_str = hashString.substring(1);
-	// var pos = parseInt(num_str);
-
-	return snap_to(pos);
-}
-
-function snap_to(pos){
-
-	var snap = parseInt(pos / 100) * 100;
-	return snap;
-
-	/*
-	a = Math.floor(pos/10000);
-	b = Math.floor((pos - a * 10000)/1000);
-	c = Math.floor(((pos - a * 10000) - (b * 1000))/100);
+	var key = e.keyCode || e.which;
+	var keychar = String.fromCharCode(key);
 	
-	tl = Math.round(pos/100) * 100;
-	return tl;
-	*/
+	var redraw = true;
+	
+	var pos = 0;
+	var cp = 0;
+	
+	var href = location.href;
+	var idx = href.indexOf('#');
+	
+	if (idx != -1){		
+		var hash = href.substring(idx);
+		var num_str = hash.substring(1);
+		pos = parseInt(num_str);
+	}
+	
+	var snap = snap_to(pos);
+	var next = snap + 100;
+	
+	var offset = 0
+	
+	// left-arrow
+	
+	if (key == 37){
+		
+		cp = pos - 1;
+		offset = -100;	// this is the problem?
+		
+		if (cp >= snap){
+			redraw = false;
+		}
+	}
+	
+	// up-arrow
+	
+	else if (key == 38){
+		
+		cp = pos - incr;
+		offset = -100;
+		
+		if (cp >= snap){
+			redraw = false;
+		}
+	}
+	
+	// right-arrow
+	
+	else if (key == 39){
+		
+		cp = pos + 1;
+		
+		if (cp < snap){
+			redraw = false;
+		}
+	}
+	
+	// down-arrow
+	
+	else if (key == 40){
+		
+		cp = pos + incr;
+		
+		if (cp < next){
+			redraw = false;
+		}
+	}
+	
+	else {
+		return;
+	}
+	
+	if (cp <= 0){
+		cp = 0;
+	}
+	
+	location.href = "#" + cp;
+	
+	if (redraw){
+		draw_table(snap_to(cp + offset));
+	}
+	
+	draw_codepoint(cp);
 }
 
 window.addEventListener("load", function load(event){
-
-	the_top_left = 0;
-	var pos = the_top_left;
 	
-	var hash = window.location.hash;
-	
-	if (hash) {
-		pos = hash2dec(hash);
-		the_top_left = to_spot(hash);
-	}
-
 	var jump = document.getElementById("jumpto");
 	var anchors = jump.getElementsByTagName("a");
 	var count = anchors.length;
@@ -301,111 +408,16 @@ window.addEventListener("load", function load(event){
 		var a = anchors[i];
 		
 		a.onclick = function(e){
+			
 			var el = e.target;
 			var href = el.getAttribute("href");
-			var wanted = href.substring(href.indexOf('#'));
-			draw_table(to_spot(wanted));			
+
+			var cp = hash_to_codepoint(href);
+			redraw(cp);
 		};
 	}
 
-	window.onkeydown = function(e){
-
-		// console.log(e);
-
-		var incr = 10;
-
-		if (e.shiftKey){
-			incr = 100;
-
-			if (e.altKey){
-				incr = 1000;
-			}
-		}
-		
-		var key = e.keyCode || e.which;
-		var keychar = String.fromCharCode(key);
-
-		var redraw = true;
-		
-		var pos = 0;
-		var wanted = 0;
-
-		var href = location.href;
-		var idx = href.indexOf('#');
-	
-		if (idx != -1){		
-			var hash = href.substring(idx);
-			var num_str = hash.substring(1);
-			pos = parseInt(num_str);
-		}
-
-		var snap = snap_to(pos);
-		var next = snap + 100;
-		
-		var offset = 0
-		
-		// left-arrow
-		
-		if (key == 37){
-			
-			wanted = pos - 1;
-			offset = -100;	// this is the problem?
-			
-			if (wanted >= snap){
-				redraw = false;
-			}
-		}
-
-		// up-arrow
-		
-		else if (key == 38){
-
-			wanted = pos - incr;
-			offset = -100;
-			
-			if (wanted >= snap){
-				redraw = false;
-			}
-		}
-		
-		// right-arrow
-
-		else if (key == 39){
-			
-			wanted = pos + 1;
-
-			if (wanted < snap){
-				redraw = false;
-			}
-		}
-
-		// down-arrow
-		
-		else if (key == 40){
-
-			wanted = pos + incr;
-			
-			if (wanted < next){
-				redraw = false;
-			}
-		}
-
-		else {
-			return;
-		}
-		
-		if (wanted <= 0){
-			wanted = 0;
-		}
-		
-		location.href = "#" + wanted;
-
-		if (redraw){
-			draw_table(snap_to(wanted + offset));
-		}
-
-		drawBig(wanted);
-	};
+	window.onkeydown = on_keydown;
 	
 	var search_input = document.getElementById("search");
 	
@@ -430,34 +442,36 @@ window.addEventListener("load", function load(event){
 
 		var search_input = document.getElementById("search");
 		search_input.value = "";
-		
-		draw_table(the_top_left);		
+
+		var cp = get_current();
+		redraw(cp);
 	};
 
 	var prev_button = document.getElementById("prev");
 
 	prev_button.onclick = function(e){
 
-		var pos = snap_to(the_top_left);
-		var prev = pos - 100;
+		var current = get_current();
+		var snap = snap_to(current);
+		
+		var cp = snap - 100;
 
-		if (prev < 0){
+		if (cp < 0){
 			return;
 		}
 		
-		location.href = "#" + prev;		
-		draw_table(prev);
+		redraw(cp);
 	};
 	
 	var next_button = document.getElementById("next");
 
 	next_button.onclick = function(e){
 
-		var pos = snap_to(the_top_left);
-		var next = pos + 100;
-
-		location.href = "#" + next;		
-		draw_table(next);		
+		var current = get_current();
+		var snap = snap_to(current);
+		
+		var cp = snap + 100;
+		redraw(cp);		
 	};
 
 	var codepoint = document.getElementById("codepoint");
@@ -465,30 +479,11 @@ window.addEventListener("load", function load(event){
 	codepoint.onchange = function(e){
 
 		var el = e.target;
-		var cp = el.value;
 
-		// &#9600;
-		// U+2580;
-		// U+1F42E;
-		
-		var m = cp.match(/(?:U\+|\&\#)?([0-9a-f]+)\;?/i);
-
-		if (m){
-			cp = m[1];
-
-			if (! cp.match(/^\d+$/)){
-				cp = parseInt(cp, 16);
-			}
-		}
-
-		cp = parseInt(cp);
-		
-		var snap = snap_to(cp);
-		draw_table(name);
-		drawBig(cp);
-		
+		var cp = to_codepoint(el.value);
+		redraw(cp);
 	};
-	
-	draw_table(the_top_left);
-	drawBig(pos);
+
+	var cp = get_current();
+	redraw(cp);
 });
