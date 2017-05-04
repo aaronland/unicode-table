@@ -253,7 +253,10 @@ td:hover {
     color:#000;
 }
 
-.codepoint-name:hover:after {
+.tts {
+    margin-top:1em;
+}
+
+.tts:after {
     content: "🔊";
-    margin-left:.5em;
 }
