@@ -252,3 +252,8 @@ td:hover {
 #nav li button:hover {
     color:#000;
 }
+
+.codepoint-name:hover:after {
+    content: "🔊";
+    margin-left:.5em;
+}

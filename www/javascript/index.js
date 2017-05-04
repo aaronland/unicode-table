@@ -54,6 +54,16 @@ function snap_to(cp){
 	return snap;
 }
 
+function codepoint_to_hex(cp){
+
+	var hex = parseInt(cp);
+	hex = hex.toString(16);
+	hex = hex.toUpperCase();
+	hex = pad_four(hex);
+	
+	return hex;
+}
+
 function search(q){
 
 	q = q.toUpperCase();
@@ -256,13 +266,9 @@ function draw_codepoint(cp, name){
 	if (preview){
 		preview.setAttribute("class", "selected");
 	}
-	
-	var hex = parseInt(cp);
-	hex = hex.toString(16);
-	hex = hex.toUpperCase();
-	hex = pad_four(hex);
-	
-	var name = "&#160;";
+
+	var hex = codepoint_to_hex(cp);
+	var name = "";
 	
 	if (ucd[hex]) {
 		name = ucd[hex];
@@ -282,16 +288,36 @@ function draw_codepoint(cp, name){
 
 	var n = document.createElement("li");
 	n.innerHTML = name;
+
+	if (('SpeechSynthesisUtterance' in window) && (name)){
+
+		n.setAttribute("class", "codepoint-name");
+		n.setAttribute("data-codepoint", cp);		
+		
+		n.onclick = function(e){
+
+			var el = e.target;
+			
+			var cp = el.getAttribute("data-codepoint");
+			var hex = codepoint_to_hex(cp);
+			var name = ucd[hex];
+			
+			var msg = new SpeechSynthesisUtterance();
+			msg.text = String.fromCodePoint(cp) + ", or: " + name;
+	
+			speechSynthesis.speak(msg);
+		};
+	}
 	
 	var i = document.createElement("li");
 	i.innerHTML = '&amp;#' + cp + ';';
 
 	var h = document.createElement("li");
 	h.innerHTML = 'U+' + hex + ';';
-	
+
 	details.appendChild(n);
 	details.appendChild(i);
-	details.appendChild(h);		
+	details.appendChild(h);
 	
 	wrapper.appendChild(letter);
 	wrapper.appendChild(details);	
