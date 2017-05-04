@@ -11,19 +11,29 @@ let mainWindow
 
 function createWindow () {
 
-	mainWindow = new BrowserWindow({width: 1085, height: 720})
+	var w = 1085;
+	var h = 775;
+	
+	mainWindow = new BrowserWindow({
+		width: w, height: h,
+		minWidth: w, minHeight: h,
+		maxWidth: w, maxHeight: h,
+		title: "UnicodeTable",
+		webgl: false,
+		webaudio: false,
+	});
 	
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'www/index.html'),
 		protocol: 'file:',
 		slashes: true
-	}))
+	}));
 	
 	// mainWindow.webContents.openDevTools()
 	
 	mainWindow.on('closed', function () {
-		mainWindow = null
-	})
+		mainWindow = null;
+	});
 }
 
 app.on('ready', function(){
@@ -56,13 +66,15 @@ app.on('ready', function(){
 
 
 app.on('window-all-closed', function () {
+	
 	if (process.platform !== 'darwin') {
 		app.quit();
 	}
-})
+});
 
 app.on('activate', function () {
+	
 	if (mainWindow === null) {
 		createWindow();
 	}
-})
+});
