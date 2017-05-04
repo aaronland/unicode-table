@@ -39,6 +39,16 @@ npm install
 npm start
 ```
 
+You can also build your own native application with a few extra steps:
+
+```
+# Install the electron-packager utlities
+npm install -g electron-packager
+
+# Build a standalong version of unicode-table for your computer
+electron-packager ./ "UnicodeTable" --icon="app_icon" --overwrite --prune
+```
+
 ## Pictures or it didn't happen
 
 ### Browsing
