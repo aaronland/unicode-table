@@ -459,6 +459,19 @@ window.addEventListener("load", function load(event){
 		location.href = "#" + next;		
 		draw_table(next);		
 	};
+
+	var codepoint = document.getElementById("codepoint");
+	
+	codepoint.onchange = function(e){
+
+		var el = e.target;
+		var cp = el.value;
+		
+		var snap = snap_to(cp);
+		draw_table(name);
+		drawBig(cp);
+		
+	};
 	
 	draw_table(the_top_left);
 	drawBig(pos);
