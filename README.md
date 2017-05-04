@@ -65,6 +65,12 @@ electron-packager ./ "UnicodeTable" --icon="app_icon" --overwrite --prune
 
 ![](images/20170503-unicode-table-unihan-2.png)
 
+### Text to speech
+
+![](images/20170504-unicode-table-tts.png)
+
+["Fried egg, or cooking"](https://thisisaaronland.github.io/unicode-table/#127859)
+
 ## Important
 
 This is still wet paint. It's not pretty under the hood or above but it works. At least for me. There are probably missing features that we both want. [Feedback is welcome.](https://github.com/thisisaaronland/unicode-table/issues)
