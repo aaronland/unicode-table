@@ -288,13 +288,26 @@ function draw_codepoint(cp, name){
 
 	var n = document.createElement("li");
 	n.innerHTML = name;
+	
+	var i = document.createElement("li");
+	i.innerHTML = '&amp;#' + cp + ';';
 
-	if (('SpeechSynthesisUtterance' in window) && (name)){
+	var h = document.createElement("li");
+	h.innerHTML = 'U+' + hex + ';';
 
-		n.setAttribute("class", "codepoint-name");
-		n.setAttribute("data-codepoint", cp);		
+	details.appendChild(n);
+	details.appendChild(i);
+	details.appendChild(h);
+
+	if ((name) && ('SpeechSynthesisUtterance' in window)){
+
+		var s = document.createElement("li");
+		s.innerHTML = '';
 		
-		n.onclick = function(e){
+		s.setAttribute("class", "tts");
+		s.setAttribute("data-codepoint", cp);		
+		
+		s.onclick = function(e){
 
 			var el = e.target;
 			
@@ -307,17 +320,9 @@ function draw_codepoint(cp, name){
 	
 			speechSynthesis.speak(msg);
 		};
+
+		details.appendChild(s);
 	}
-	
-	var i = document.createElement("li");
-	i.innerHTML = '&amp;#' + cp + ';';
-
-	var h = document.createElement("li");
-	h.innerHTML = 'U+' + hex + ';';
-
-	details.appendChild(n);
-	details.appendChild(i);
-	details.appendChild(h);
 	
 	wrapper.appendChild(letter);
 	wrapper.appendChild(details);	
