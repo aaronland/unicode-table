@@ -1,7 +1,28 @@
+a {
+    text-decoration:none;
+    color:black;
+}
+
 body {
     font-family: sans-serif;
     margin:2em;
     min-width:1000px;
+}
+
+div#sliders {
+    width:1000px;
+    padding-bottom:30px;
+    font-size:8pt;
+    text-transform:uppercase;
+}
+
+div.slidiv {
+    float:left;
+    font-size:8pt;
+}
+
+input[type=text]:hover {
+    border:2px solid #000;
 }
 
 table {
@@ -20,19 +41,8 @@ td,td {
     border:1px solid #eee;
 }
 
-.preview {
-    height:30px;
-    margin-top:5px;
-}
-
-.exp {
-    font:7pt sans-serif;
-    color:#aaa;
-    height:1em;
-}
-
-#unibox {
-    clear:both;
+#big {
+    margin:50px;
 }
 
 #bigletter {
@@ -71,78 +81,10 @@ td,td {
     background:#eee;    
 }
 
-#big {
-    margin:50px;
-}
-
-.medium {
-    font-size:.05em;
-    width:300px;
-}
-
-a {
-    text-decoration:none;
-    color:black;
-}
-
-div#sliders {
-    width:1000px;
-    padding-bottom:30px;
-    font-size:8pt;
-    text-transform:uppercase;
-}
-
-div.slidiv {
-    float:left;
-    font-size:8pt;
-}
-
-#unicode {
-    float:left;
-}
-
-#jumpto {
-    display: inline;
-    float:right;
-}
-
-#jumpto li {
-    display: inline;
-    padding-left:1em;
-}   
-
-#results {
-    height:500px;
-    width:500px;
-    max-height:500px;
-    overflow:scroll;
-    font-size:12pt;
-    padding:1em;
-    padding-left:.2em;
-}
-
-#results td {
-    text-align:left;
-}
-
-#results tr:hover {
-    font-weight:700;
-}
-
-#search {
-    padding:.5em;
-    font-weight:700;
-    text-transform: uppercase;
-}
-
 #codepoint {
     padding:.5em;
     font-weight:700;
     text-transform: uppercase;
-}
-
-input[type=text]:hover {
-    border:2px solid #000;
 }
 
 #clear-results {
@@ -150,19 +92,6 @@ input[type=text]:hover {
     padding:.6em;
     border: solid thin;
     font-weight:700;
-}
-
-.char {
-    text-align: center !important;
-    border:solid thin;
-    padding-left:.5em;
-    padding-right:.5em;    
-}
-
-.name {
-    font-size:11px;
-    width:100%;
-    padding-left:1em;
 }
 
 #footer {
@@ -188,46 +117,15 @@ input[type=text]:hover {
     padding-right:1em;
 }   
 
-td:hover {
-    background-color:#aaa;
+#jumpto {
+    display: inline;
+    float:right;
 }
 
-.selected {
-    background-color:yellow;
-}
-
-.step:before {
-    content: "→";
-    font-weight:700;
-    padding-right: .5em;
-    color:#000;
-}
-
-.step-forward:before {
-    content: "→";
-}
-
-.step-back:before {
-    content: "←";
-}
-
-.advance:before {
-    content: "↓";
-}
-
-.reverse:before {
-    content: "↑";
-}
-
-.warning {
-    font-weight: 700;
-    color: red;
-}
-
-.warning:before {
-    content: "⚠";
-    padding-right: 1em;
-}
+#jumpto li {
+    display: inline;
+    padding-left:1em;
+}   
 
 #nav {
     width: 495px;
@@ -253,6 +151,108 @@ td:hover {
     color:#000;
 }
 
+#results {
+    height:500px;
+    width:500px;
+    max-height:500px;
+    overflow:scroll;
+    font-size:12pt;
+    padding:1em;
+    padding-left:.2em;
+}
+
+#results td {
+    text-align:left;
+}
+
+#results tr:hover {
+    font-weight:700;
+}
+
+#search {
+    padding:.5em;
+    font-weight:700;
+    text-transform: uppercase;
+}
+
+#unibox {
+    clear:both;
+}
+
+#unicode {
+    float:left;
+}
+
+.advance:before {
+    content: "↓";
+}
+
+.char {
+    text-align: center !important;
+    border:solid thin;
+    padding-left:.5em;
+    padding-right:.5em;    
+}
+
+.exp {
+    font:7pt sans-serif;
+    color:#aaa;
+    height:1em;
+}
+
+.medium {
+    font-size:.05em;
+    width:300px;
+}
+
+.name {
+    font-size:11px;
+    width:100%;
+    padding-left:1em;
+}
+
+.permalink:hover {
+        cursor:pointer;
+}
+
+.permalink:hover:after {
+    content: "☁️";
+    padding-left:.5em;
+    font-size:.75em;
+}
+
+.preview {
+    height:30px;
+    margin-top:5px;
+}
+
+.reverse:before {
+    content: "↑";
+}
+
+.selected {
+    background-color:yellow;
+}
+
+.step:before {
+    content: "→";
+    font-weight:700;
+    padding-right: .5em;
+    color:#000;
+}
+
+.step-forward:before {
+    content: "→";
+}
+
+.step-back:before {
+    content: "←";
+}
+
+td:hover {
+    background-color:#aaa;
+}
+
 .tts {
     margin-top:1em;
 }
@@ -265,12 +265,12 @@ td:hover {
     content: "💬";
 }
 
-.permalink:hover {
-        cursor:pointer;
+.warning {
+    font-weight: 700;
+    color: red;
 }
 
-.permalink:hover:after {
-    content: "☁️";
-    padding-left:.5em;
-    font-size:.75em;
+.warning:before {
+    content: "⚠";
+    padding-right: 1em;
 }
