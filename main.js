@@ -42,13 +42,19 @@ app.on('ready', function(){
 
 	// https://pracucci.com/atom-electron-enable-copy-and-paste.html
 
+	var name = app.getName();
+
+	var about = "About " + name;
+	var hide = "Hide " + name;
+	var quit = "Quit " + name;
+	
 	var template = [{
 		label: "Application",
 		submenu: [
-			{ label: "About UnicodeTable", selector: "orderFrontStandardAboutPanel:" },
+			{ label: about, selector: "orderFrontStandardAboutPanel:" },
 			{ type: "separator" },
-			{ label: "Hide UnicodeTable", accelerator: "Command+H", click: function() { app.hide(); }},
-			{ label: "Quit UnicodeTable", accelerator: "Command+Q", click: function() { app.quit(); }}
+			{ label: hide, accelerator: "Command+H", click: function() { app.hide(); }},
+			{ label: quit, accelerator: "Command+Q", click: function() { app.quit(); }}
 		]}, {
 			label: "Edit",
 			submenu: [
