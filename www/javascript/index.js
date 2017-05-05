@@ -287,7 +287,21 @@ function draw_codepoint(cp, name){
 	details.setAttribute("class", "medium");
 
 	var n = document.createElement("li");
+	n.setAttribute("data-codepoint", cp);
+	n.setAttribute("class", "permalink");
+	n.setAttribute("title", "this codepoint has a permalink");
 	n.innerHTML = name;
+
+	n.onclick = function(e){
+
+		var el = e.target;
+		var cp = el.getAttribute("data-codepoint");
+
+		var url = "https://thisisaaronland.github.io/unicode-table/#" + encodeURIComponent(cp);
+		
+		const {shell} = require('electron');
+                shell.openExternal(url);
+	};
 	
 	var i = document.createElement("li");
 	i.innerHTML = '&amp;#' + cp + ';';
@@ -302,10 +316,11 @@ function draw_codepoint(cp, name){
 	if ((name) && ('SpeechSynthesisUtterance' in window)){
 
 		var s = document.createElement("li");
+		s.setAttribute("title", "read this codepoint aloud");		
 		s.innerHTML = '';
 		
 		s.setAttribute("class", "tts");
-		s.setAttribute("data-codepoint", cp);		
+		s.setAttribute("data-codepoint", cp);
 		
 		s.onclick = function(e){
 
