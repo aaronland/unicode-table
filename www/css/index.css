@@ -257,16 +257,20 @@ td:hover {
     margin-top:1em;
 }
 
+.tts:hover {
+    cursor:pointer;
+}
+
 .tts:after {
     content: "💬";
 }
 
 .permalink:hover {
+        cursor:pointer;
 }
 
 .permalink:hover:after {
     content: "☁️";
     padding-left:.5em;
     font-size:.75em;
-    
 }
