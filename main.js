@@ -45,9 +45,10 @@ app.on('ready', function(){
 	var template = [{
 		label: "Application",
 		submenu: [
-			{ label: "About Application", selector: "orderFrontStandardAboutPanel:" },
+			{ label: "About UnicodeTable", selector: "orderFrontStandardAboutPanel:" },
 			{ type: "separator" },
-			{ label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+			{ label: "Hide UnicodeTable", accelerator: "Command+H", click: function() { app.hide(); }},
+			{ label: "Quit UnicodeTable", accelerator: "Command+Q", click: function() { app.quit(); }}
 		]}, {
 			label: "Edit",
 			submenu: [
