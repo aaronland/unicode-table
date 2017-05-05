@@ -258,5 +258,15 @@ td:hover {
 }
 
 .tts:after {
-    content: "🔊";
+    content: "💬";
+}
+
+.permalink:hover {
+}
+
+.permalink:hover:after {
+    content: "☁️";
+    padding-left:.5em;
+    font-size:.75em;
+    
 }
