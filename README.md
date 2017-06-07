@@ -85,6 +85,10 @@ Unicode and Unihan data are exported using `ucd-dump` tool which is included in 
 
 _Note: The _ucd-dump_ program only generates a JSON-encoded dump and does not add Javascript variable declarations. I add those by hand._
 
+## What's up with the application icon?
+
+`图` is the Unicode character for [DIAGRAM; CHART, MAP, PICTURE](https://thisisaaronland.github.io/unicode-table/#22270).
+
 ## See also
 
 * http://www.ftrain.com/unicode-table.html
