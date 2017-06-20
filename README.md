@@ -77,13 +77,18 @@ This is still wet paint. It's not pretty under the hood or above but it works. A
 
 ## Where does the data come from?
 
-Unicode and Unihan data are exported using `ucd-dump` tool which is included in the [go-ucd](https://github.com/whosonfirst/go-ucd/) package. For example:
+Unicode and Unihan data are exported using `ucd-dump` tool which is part of the [go-ucd](https://github.com/whosonfirst/go-ucd/) package and included as a binary tool (for OS X) with this repo. The whole process is wrapped up in a handy `ucd` Makefile target, like this:
 
 ```
-./bin/ucd-dump -unihan > ~/unicode-table/www/javascript/ucd.js
+ucd:
+	if test -f www/javascript/ucd.js.tmp; then rm www/javascript/ucd.js.tmp; fi
+	touch www/javascript/ucd.js.tmp
+	printf %s "var ucd=" >> www/javascript/ucd.js.tmp
+	bin/darwin/ucd-dump -unihan | tr "\n\r" ";" >> www/javascript/ucd.js.tmp
+	mv www/javascript/ucd.js.tmp www/javascript/ucd.js
 ```
 
-_Note: The _ucd-dump_ program only generates a JSON-encoded dump and does not add Javascript variable declarations. I add those by hand._
+_Note: The _ucd-dump_ program will generate a UCD definition for whatever its current internal mapping defines (Unicode 10.0 as of this writing). It does not pull directly dynamically from the Unicode.org website._
 
 ## What's up with the application icon?
 
