@@ -22,3 +22,11 @@ osx:
 	electron-packager ./ "UnicodeTable" --icon="app_icon" --overwrite --prune
 
 package: icons osx
+
+ucd:
+	if test -f www/javascript/ucd.js.tmp; then rm www/javascript/ucd.js.tmp; fi
+	touch www/javascript/ucd.js.tmp
+	printf %s "var ucd=" >> www/javascript/ucd.js.tmp
+	bin/darwin/ucd-dump -unihan | tr "\n\r" ";" >> www/javascript/ucd.js.tmp
+	mv www/javascript/ucd.js.tmp www/javascript/ucd.js
+
