@@ -411,6 +411,8 @@ function on_keydown(e){
 		cp = 0;
 	}
 
+	e.preventDefault();
+
 	redraw(cp);
 }
 
