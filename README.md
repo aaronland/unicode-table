@@ -6,14 +6,14 @@ It doesn't have sliders but it does have keyboard commands and rudimentary searc
 
 ## Demo
 
-[https://thisisaaronland.github.io/unicode-table/](https://thisisaaronland.github.io/unicode-table/)
+[https://aaronland.github.io/unicode-table/](https://aaronland.github.io/unicode-table/)
 
 ## Usage
 
 First, clone this repository:
 
 ```
-git clone https://github.com/thisisaaronland/unicode-table
+git clone https://github.com/aaronland/unicode-table
 ```
 
 ### In a plain old web browser
@@ -69,11 +69,11 @@ electron-packager ./ "UnicodeTable" --icon="app_icon" --overwrite --prune
 
 ![](images/20170504-unicode-table-tts.png)
 
-["Fried egg, or cooking"](https://thisisaaronland.github.io/unicode-table/#127859)
+["Fried egg, or cooking"](https://aaronland.github.io/unicode-table/#127859)
 
 ## Important
 
-This is still wet paint. It's not pretty under the hood or above but it works. At least for me. There are probably missing features that we both want. [Feedback is welcome.](https://github.com/thisisaaronland/unicode-table/issues)
+This is still wet paint. It's not pretty under the hood or above but it works. At least for me. There are probably missing features that we both want. [Feedback is welcome.](https://github.com/aaronland/unicode-table/issues)
 
 ## Where does the data come from?
 
@@ -92,7 +92,7 @@ _Note: The _ucd-dump_ program will generate a UCD definition for whatever its cu
 
 ## What's up with the application icon?
 
-`图` is the Unicode character for [DIAGRAM; CHART, MAP, PICTURE](https://thisisaaronland.github.io/unicode-table/#22270).
+`图` is the Unicode character for [DIAGRAM; CHART, MAP, PICTURE](https://aaronland.github.io/unicode-table/#22270).
 
 ## See also
 
